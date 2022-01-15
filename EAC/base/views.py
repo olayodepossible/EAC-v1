@@ -11,8 +11,18 @@ rooms = [
 
 
 def home(req):
-    return render(req, 'base/home.html', {'rooms': rooms})
+    context = {'rooms': rooms}
+    return render(req, 'base/home.html', context)
 
 
-def room(req):
-    return render(req, 'base/room.html', {'rooms': rooms})
+def room(req, key):
+    class_room = None
+    for i in rooms:
+        if i['id'] == int(key):
+            class_room = i
+    context = {'room': class_room}
+    return render(req, 'base/room.html', context)
+
+def createRoom(req):
+    context = {}
+    return render(req, 'base/room_form.html', context)
